@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT</title>
+    <link rel="stylesheet" href="assets/css/style.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="box real-time">
+            <div class="real-time-up flex">
+                <div class="real-time-left flex">
+                    <div class="real-time-content flex">
+                        <div class="real-time-info flex">
+                            <div class="real-time-gas flex">
+                                <div class="gas flex">CO2</div>
+                                <div class="concentration concentration_CO2 flex">3.814 ppm</div>
+                            </div>
+
+                            <div class="real-time-status flex">
+                                <div class="status flex">Status</div>
+                                <div class="status-value status-value_CO2 status-value_danger flex">Dangerous</div>
+                            </div>
+                        </div>
+
+                        <div class="real-time-icon real-time-icon_CO2 flex">
+                            <!-- CO2 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="real-time-right flex">
+                    <div class="real-time-content flex">
+                        <div class="real-time-info flex">
+                            <div class="real-time-gas flex">
+                                <div class="gas flex">CO</div>
+                                <div class="concentration concentration_CO flex">1.764 ppm</div>
+                            </div>
+
+                            <div class="real-time-status flex">
+                                <div class="status flex">Status</div>
+                                <div class="status-value status-value_CO status-value_normal flex">Normal</div>
+                            </div>
+                        </div>
+
+                        <div class="real-time-icon real-time-icon_CO flex">
+                            <!-- CO -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="real-time-down flex">
+                <div class="real-time-left flex">
+                    <div class="real-time-content flex">
+                        <div class="real-time-info flex">
+                            <div class="real-time-gas flex">
+                                <div class="gas flex">NH4</div>
+                                <div class="concentration concentration_NH4 flex">3.636 ppm</div>
+                            </div>
+
+                            <div class="real-time-status flex">
+                                <div class="status flex">Status</div>
+                                <div class="status-value status-value_NH4 status-value_warning flex">Normal</div>
+                            </div>
+                        </div>
+
+                        <div class="real-time-icon real-time-icon_NH4 flex">
+                            <!-- NH4 -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="real-time-right flex">
+                    <div class="real-time-content flex">
+                        <div class="real-time-info flex">
+                            <div class="real-time-gas flex">
+                                <div class="gas flex">Acetona</div>
+                                <div class="concentration concentration_Acetona flex">2.155 ppm</div>
+                            </div>
+
+                            <div class="real-time-status flex">
+                                <div class="status flex">Status</div>
+                                <div class="status-value status-value_Acetona status-value_normal flex">Normal</div>
+                            </div>
+                        </div>
+
+                        <div class="real-time-icon real-time-icon_Acetona flex">
+                            <!-- Acetona -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box maps">
+            <div class="maps-container">
+                <select id="maps-search">
+                    <option value="">Select a location...</option>
+                </select>
+            
+                <div id="maps-map"></div>
+            </div>
+        </div>
+
+        <div class="box charts">
+            <main class="charts-container">
+                <div class="chart-box">
+                    <canvas id="chartCO2"></canvas>
+                    <h3>Statistical CO2</h3>
+                </div>
+                <div class="chart-box">
+                    <canvas id="chartCO"></canvas>
+                    <h3>Statistical CO</h3>
+                </div>
+                <div class="chart-box">
+                    <canvas id="chartNH4"></canvas>
+                    <h3>Statistical NH4</h3>
+                </div>
+                <div class="chart-box">
+                    <canvas id="chartAcetona"></canvas>
+                    <h3>Statistical Acetona</h3>
+                </div>
+            </main>
+        </div>
+
+        <div class="box notifications">Notifications</div>
+
+    </div>
+
+    <script type="module" src="assets/js/chart.js"></script>
+    <script type="module" src="assets/js/real_time.js"></script>
+    <script type="module" src="assets/js/maps.js"></script>
+</body>
+</html>
