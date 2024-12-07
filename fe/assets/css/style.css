@@ -1,0 +1,277 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  /* gap: 20px; */
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  margin: 10px;
+}
+
+.real-time {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #b6e3ff;
+  padding: 20px;
+}
+
+.maps {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.charts {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  background-color: #b6e3ff;
+}
+
+.notifications {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.flex {
+  display: flex;
+}
+
+/* real time */
+.real-time-up {
+  height: min-content;
+  /* align-self: stretch; */
+  align-items: center;
+  gap: 20px;
+}
+
+.real-time-down {
+  height: min-content;
+  /* align-self: stretch; */
+  align-items: center;
+  gap: 20px;
+}
+
+.real-time-left {
+  width: min-content;
+  height: min-content;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.real-time-right {
+  width: min-content;
+  height: min-content;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.real-time-content {
+  width: min-content;
+  height: min-content;
+  align-self: flex-start;
+  align-items: center;
+  gap: 64px;
+}
+
+.real-time-info {
+  width: 142px;
+  height: min-content;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 37px;
+}
+
+.real-time-gas {
+  height: min-content;
+  align-self: stretch;
+  flex-direction: column;
+  gap: 4.5079px;
+}
+
+.gas {
+  color: #515151;
+  font-size: 27.0476px;
+  font-weight: 600;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  letter-spacing: -0.01em;
+  height: min-content;
+  align-self: stretch;
+  flex-direction: column;
+}
+
+.concentration {
+  color: #515151cc;
+  font-size: 20.2857px;
+  font-weight: bold;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  letter-spacing: -0.01em;
+  height: min-content;
+  align-self: stretch;
+  flex-direction: column;
+}
+
+.real-time-status {
+  width: 94px;
+  height: min-content;
+  flex-direction: column;
+  gap: 3.7228px;
+}
+
+.status {
+  color: #373737;
+  font-size: 22.3366px;
+  font-weight: bold;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  letter-spacing: -0.01em;
+  height: min-content;
+  align-self: stretch;
+  flex-direction: column;
+}
+
+.status-value {
+  font-size: 18.6139px;
+  font-weight: bold;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  letter-spacing: -0.01em;
+  height: min-content;
+  align-self: stretch;
+  flex-direction: column;
+}
+
+.status-value_normal {
+  color: #5ce65c;
+}
+
+.status-value_warning {
+  color: #f29900;
+}
+
+.status-value_danger {
+  color: #ff0000;
+}
+
+.real-time-icon {
+  width: 150px;
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.real-time-icon_CO2 {
+  background-image: url(/assets/img/co21.png);
+}
+
+.real-time-icon_CO {
+  background-image: url(/assets/img/co211.png);
+}
+
+.real-time-icon_NH4 {
+  background-image: url(/assets/img/pollution.png);
+}
+
+.real-time-icon_Acetona {
+  background-image: url(/assets/img/pollution.png);
+}
+
+/* Charts */
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.chart-box {
+  width: 404px;
+  text-align: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.tooltip-time {
+  font-size: 14px;
+  color: #888;
+}
+
+.tooltip-ppm {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Maps */
+
+.maps-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#maps-search {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 60%;
+  padding: 5px;
+}
+
+#maps-map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
