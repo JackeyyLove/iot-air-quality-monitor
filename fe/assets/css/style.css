@@ -9,14 +9,15 @@ body {
   background-color: #f5f5f5;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100vh;
+  /* padding-top: 30px; */
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   /* gap: 20px; */
   background-color: #fff;
   width: 100vw;
@@ -55,15 +56,18 @@ body {
 }
 
 .charts {
-  grid-column: 1 / 2;
+  grid-column: 1 / 3;
   grid-row: 2 / 3;
   background-color: #b6e3ff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.notifications {
+/* .notifications {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-}
+} */
 
 .flex {
   display: flex;
@@ -88,7 +92,7 @@ body {
   width: min-content;
   height: min-content;
   flex-direction: column;
-  padding: 24px;
+  padding: 4px;
   border-radius: 20px;
   background-color: #fff;
 }
@@ -97,7 +101,7 @@ body {
   width: min-content;
   height: min-content;
   flex-direction: column;
-  padding: 24px;
+  padding: 4px;
   border-radius: 20px;
   background-color: #fff;
 }
@@ -107,7 +111,7 @@ body {
   height: min-content;
   align-self: flex-start;
   align-items: center;
-  gap: 64px;
+  /* gap: 64px; */
 }
 
 .real-time-info {
@@ -115,7 +119,7 @@ body {
   height: min-content;
   flex-direction: column;
   align-items: flex-start;
-  gap: 37px;
+  /* gap: 37px; */
 }
 
 .real-time-gas {
@@ -188,27 +192,27 @@ body {
 }
 
 .real-time-icon {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .real-time-icon_CO2 {
-  background-image: url(/assets/img/co21.png);
+  background-image: url(../img/co21.png);
 }
 
 .real-time-icon_CO {
-  background-image: url(/assets/img/co211.png);
+  background-image: url(../img/co211.png);
 }
 
 .real-time-icon_NH4 {
-  background-image: url(/assets/img/pollution.png);
+  background-image: url(../img/pollution.png);
 }
 
 .real-time-icon_Acetona {
-  background-image: url(/assets/img/pollution.png);
+  background-image: url(../img/pollution.png);
 }
 
 /* Charts */
@@ -222,7 +226,8 @@ body {
 }
 
 .chart-box {
-  width: 404px;
+  flex: 1;
+  min-width: 330px;
   text-align: center;
   background-color: #fff;
   padding: 10px;
