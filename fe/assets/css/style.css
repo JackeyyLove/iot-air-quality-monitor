@@ -268,15 +268,233 @@ h3 {
 #maps-search {
   position: absolute;
   top: 10px;
-  left: 50%;
+  left: 46%;
   transform: translateX(-50%);
   z-index: 1000;
   width: 60%;
-  padding: 5px;
+  padding: 7px;
+  border-radius: 5px;
 }
 
 #maps-map {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+/* Signin Signup */
+/* Buttons for Sign In and Sign Up */
+.auth-buttons {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+  z-index: 999;
+}
+
+.auth-btn {
+  padding: 8px 10px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Modal Background */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Auth Form */
+.auth-form input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-form button:hover {
+  background-color: #27ae60;
+}
+
+.auth-form p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.auth-form a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
+/* Hidden Class */
+.hidden {
+  display: none;
+}
+
+/* User Actions */
+.user-actions {
+  position: absolute;
+  top: 30px;
+  right: 32px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  z-index: 998;
+}
+
+/* Notification Icon */
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #3498db;
+}
+
+.icon-btn:hover {
+  color: #2980b9;
+}
+
+/* User Avatar */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Hình tròn */
+  cursor: pointer;
+  border: 2px solid #3498db;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+/* Hidden Class */
+.hidden {
+  display: none;
+}
+
+.bell {
+  width: 35px;
+  height: 35px;
+}
+
+/* Notification List */
+.notification-list {
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+.notification-list h3 {
+  background-color: #3498db;
+  color: white;
+  margin: 0;
+  padding: 6px;
+  text-align: center;
+}
+
+.notification-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 214px;
+  overflow-y: auto;
+}
+
+.notification-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
+}
+
+.notification-list li:last-child {
+  border-bottom: none;
+}
+
+.notification-list .danger {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.notification-list .warning {
+  color: #f39c12;
+  font-weight: bold;
 }
