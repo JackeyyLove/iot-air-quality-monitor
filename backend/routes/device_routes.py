@@ -11,7 +11,7 @@ def before_request():
     device_controller = DeviceController(current_app)
 
 @device_bp.route('/device/<int:device_id>/logs', methods=['GET'])
-@login_required
+# @login_required
 def get_device_logs(device_id):
     logs = device_controller.get_device_logs(device_id)
     return logs, 200, {'Content-Type': 'application/json'}
