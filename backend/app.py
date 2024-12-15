@@ -1,42 +1,77 @@
-from flask import Flask, session
+from flask import Flask, jsonify
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
-from routes.user_routes import user_bp
-from services.mqtt_service import mqtt_client, message_handling
+from flask_login import LoginManager, UserMixin
 import threading
+from services.mqtt_service import mqtt_client, message_handling
+from bson.objectid import ObjectId
 
-# Initialize the app
-app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://admin:pass@localhost:27017/airDB?authSource=admin"
-app.config["SECRET_KEY"] = "secret"  # secret key for session management
-mongo = PyMongo(app)
-bcrypt = Bcrypt(app)
+mongo = PyMongo()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 
-# Register blueprints
-app.register_blueprint(user_bp)
+class User(UserMixin):
+    def __init__(self, user_id):
+        self.id = user_id
 
-# MQTT Client
-mqtt_client.on_message = message_handling
-if mqtt_client.connect("localhost", 1883, 60) != 0:
-    print("Couldn't connect to the mqtt broker")
-    sys.exit(1)
+@login_manager.user_loader
+def load_user(user_id):
+    try:
+        user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+        if user:
+            return User(str(user['_id']))
+    except Exception:
+        return None
+    return None
 
-mqtt_client.subscribe("test_topic")
+def create_app():
+    app = Flask(__name__)
+    app.config["MONGO_URI"] = "mongodb://admin:pass@localhost:27017/airDB?authSource=admin"
+    app.config["SECRET_KEY"] = "secret"  # secret key for session management
 
-def run_mqtt():
-    with app.app_context():
-        try:
-            print("Press CTRL+C to exit MQTT client...")
-            mqtt_client.loop_forever()
-        except Exception as e:
-            print(f"Caught an Exception, something went wrong: {e}")
-        finally:
-            print("Disconnecting from the MQTT broker")
-            mqtt_client.disconnect()
+    mongo.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'user_bp.signin'
 
-# Run the server
-if __name__ == '__main__':
+    # Custom handler for unauthorized access
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        response = jsonify({"error": "Unauthorized access. Please log in."})
+        response.status_code = 401
+        return response
+
+    from routes.user_routes import user_bp
+    from routes.device_routes import device_bp
+    from routes.log_routes import log_bp
+
+    app.register_blueprint(user_bp)
+    app.register_blueprint(device_bp)
+    app.register_blueprint(log_bp)
+
+    mqtt_client.on_message = message_handling
+    if mqtt_client.connect("localhost", 1883, 60) != 0:
+        print("Couldn't connect to the mqtt broker")
+        sys.exit(1)
+
+    mqtt_client.subscribe("test_topic")
+
+    def run_mqtt():
+        with app.app_context():
+            try:
+                print("Press CTRL+C to exit MQTT client...")
+                mqtt_client.loop_forever()
+            except Exception as e:
+                print(f"Caught an Exception, something went wrong: {e}")
+            finally:
+                print("Disconnecting from the MQTT broker")
+                mqtt_client.disconnect()
+
     mqtt_thread = threading.Thread(target=run_mqtt)
     mqtt_thread.start()
-    
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
     app.run(debug=True)

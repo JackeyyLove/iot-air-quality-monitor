@@ -14,7 +14,7 @@ if client.connect("localhost", 1883, 60) != 0:
 count = 0
 while count != 50:
     message = {
-        "device_id": random.randint(1, 100),
+        "device_id": 20,
         "temperature": round(random.uniform(20.0, 30.0), 2),
         "humidity": round(random.uniform(30.0, 70.0), 2),
         "ppm": {

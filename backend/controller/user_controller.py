@@ -1,16 +1,18 @@
 # controller/user_controller.py
-from flask import jsonify, session
+from flask import jsonify
 from flask_bcrypt import Bcrypt
 from flask_pymongo import PyMongo
+from flask_login import UserMixin, login_user, logout_user
+from app import mongo, bcrypt
+
+class User(UserMixin):
+    def __init__(self, user_id):
+        self.id = user_id
 
 class UserController:
     def __init__(self, app):
         self.bcrypt = Bcrypt(app)
         self.mongo = PyMongo(app)
-
-    def serialize_doc(self, doc):
-        doc['_id'] = str(doc['_id'])
-        return doc
 
     def create_user(self, data):
         hashed_password = self.bcrypt.generate_password_hash(data['password']).decode('utf-8')
@@ -20,15 +22,16 @@ class UserController:
             "type": data['type']
         }
         user_id = self.mongo.db.users.insert_one(user).inserted_id
-        return jsonify({"message": "User created", "user": self.serialize_doc(self.mongo.db.users.find_one({"_id": user_id}))}), 201
+        return jsonify({"message": "User created", "user": str(user_id)}), 201
 
     def login(self, data):
         user = self.mongo.db.users.find_one({"username": data['username']})
         if user and self.bcrypt.check_password_hash(user['password'], data['password']):
-            session['user_id'] = str(user['_id'])
+            user_obj = User(str(user['_id']))
+            login_user(user_obj, remember=True)
             return jsonify({"message": "Login successful"}), 200
         return jsonify({"message": "Invalid username or password"}), 401
 
     def logout(self):
-        session.pop('user_id', None)
+        logout_user()
         return jsonify({"message": "Logout successful"}), 200
