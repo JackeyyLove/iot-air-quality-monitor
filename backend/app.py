@@ -44,11 +44,11 @@ def create_app():
     from routes.user_routes import user_bp
     from routes.device_routes import device_bp
     from routes.log_routes import log_bp
-
+    from routes.subscription_routes import subscription_bp
     app.register_blueprint(user_bp)
     app.register_blueprint(device_bp)
     app.register_blueprint(log_bp)
-
+    app.register_blueprint(subscription_bp)
     mqtt_client.on_message = message_handling
     if mqtt_client.connect("localhost", 1883, 60) != 0:
         print("Couldn't connect to the mqtt broker")

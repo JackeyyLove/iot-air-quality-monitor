@@ -15,3 +15,14 @@ def before_request():
 def get_device_logs(device_id):
     logs = device_controller.get_device_logs(device_id)
     return logs, 200, {'Content-Type': 'application/json'}
+
+@device_bp.route('/devices', methods=['GET'])
+@login_required
+def get_devices():
+    return device_controller.get_devices()
+
+@device_bp.route('/devices', methods=['POST'])
+@login_required
+def add_device():
+    data = request.get_json()
+    return device_controller.add_device(data)
