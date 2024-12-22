@@ -8,15 +8,21 @@ let dataCO = [];
 let dataNH4 = [];
 let dataPM25 = [];
 let labels = [];
+let temperature = [];
+let humidity = [];
 
 function updateChartsForStation(stationName) {
     const station = getStationData(stationName);
+
+    console.log(station);
 
     // Cập nhật dữ liệu cho các khí
     dataCO2 = station.CO2;
     dataCO = station.CO;
     dataNH4 = station.NH4;
     dataPM25 = station.PM25;
+    temperature = station.temperature;
+    humidity = station.humidity;
     labels = station.times;
 
     // Giới hạn labels và dữ liệu ở 20 phần tử (giữ không vượt quá 20 giá trị)
@@ -42,6 +48,10 @@ function updateChartsForStation(stationName) {
     document.querySelector('.concentration_CO').textContent = `${dataCO[dataCO.length - 1]} ppm`;
     document.querySelector('.concentration_NH4').textContent = `${dataNH4[dataNH4.length - 1]} ppm`;
     document.querySelector('.concentration_PM25').textContent = `${dataPM25[dataPM25.length - 1]} ppm`;
+
+    document.getElementById('temperature').textContent = `${temperature[temperature.length - 1]} °C`;
+    document.getElementById('humidity').textContent = `${humidity[humidity.length - 1]} %`;
+    document.getElementById('lastUpdateTime').textContent = `${labels[labels.length - 1]}`;
 
     // Cập nhật các biểu đồ
     chartCO2.update();
@@ -175,7 +185,7 @@ const options_CO2 = {
     scales: {
         y: {
             min: 300,
-            max: 500,
+            max: 800,
             ticks: {
                 stepSize: 20,
             }
@@ -240,7 +250,7 @@ const options_CO = {
     scales: {
         y: {
             min: 0,
-            max: 10,
+            max: 15,
             ticks: {
                 stepSize: 1,
             }
@@ -305,9 +315,9 @@ const options_NH4 = {
     scales: {
         y: {
             min: 0,
-            max: 5,
+            max: 0.5,
             ticks: {
-                stepSize: 1,
+                stepSize: 0.01,
             }
         },
         x: {
@@ -370,9 +380,9 @@ const options_PM25 = {
     scales: {
         y: {
             min: 0,
-            max: 50,
+            max: 150,
             ticks: {
-                stepSize: 5,
+                stepSize: 10,
             }
         },
         x: {

@@ -59,6 +59,8 @@ async function fetchStationData() {
                 CO: sortedLogs.map(entry => parseFloat(entry.co.toFixed(2))),
                 NH4: sortedLogs.map(entry => parseFloat(entry.nh3.toFixed(2))),
                 PM25: sortedLogs.map(entry => parseFloat(entry.pm25.toFixed(2))),
+                temperature: sortedLogs.map(entry => parseFloat(entry.temperature.toFixed(2))),
+                humidity: sortedLogs.map(entry => parseFloat(entry.humidity.toFixed(2))),
                 times: sortedLogs.map(entry => new Date(entry.senttime).toLocaleTimeString())
             };
 
@@ -106,6 +108,8 @@ function getStationData(stationName) {
             CO: [],
             NH4: [],
             PM25: [],
+            temperature: [],
+            humidity: [],
             times: []
         }; // Trả về dữ liệu rỗng mặc định
     }
