@@ -1,5 +1,7 @@
 import {notificationList} from "./noti.js";
 
+let isLoggedIn = false;
+
 // Elements
 const signInBtn = document.getElementById('signInBtn');
 const signUpBtn = document.getElementById('signUpBtn');
@@ -16,12 +18,20 @@ const logout = document.getElementById('logout');
 
 // Simulate successful Sign In (this can be replaced with actual authentication logic)
 function signInSuccess() {
+    isLoggedIn = true;
+
     // Hide Sign In/Sign Up buttons
     authButtons.classList.add('hidden');
     // Show Notification and Logout buttons
     userActions.classList.remove('hidden');
     // Close modal
     authModal.style.display = 'none';
+
+    // Hiển thị button đăng ký trên real-time
+    const registerButton = document.getElementById('registerStation');
+    if (registerButton) {
+        registerButton.classList.remove('hidden'); // Hiển thị nút đăng ký
+    }
 }
 
 // Show Modal with Sign In Form
@@ -87,10 +97,18 @@ window.addEventListener('click', (e) => {
 
 // Handle Logout
 logout.addEventListener('click', () => {
+    isLoggedIn = false;
+
     // Show Sign In/Sign Up buttons
     authButtons.classList.remove('hidden');
     // Hide User Actions
     userActions.classList.add('hidden');
     // Hide dropdown menu
     userDropdown.classList.add('hidden');
+
+    // Ẩn nút đăng ký trên real-time
+    const registerButton = document.getElementById('registerStation');
+    if (registerButton) {
+        registerButton.classList.add('hidden'); // Ẩn nút đăng ký
+    }
 });
