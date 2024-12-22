@@ -484,8 +484,30 @@ h3 {
 }
 
 .bell {
+  position: relative;
   width: 35px;
   height: 35px;
+}
+
+.bell.new-notification::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  border: 2px solid white;
+  z-index: 1000;
+}
+
+.noti_bell {
+  position: absolute;
+  top: -15px;
+  color: red;
+  right: 6px;
+  font-size: 35px;
 }
 
 /* Notification List */

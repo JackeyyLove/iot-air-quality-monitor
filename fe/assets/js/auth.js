@@ -1,4 +1,5 @@
 import {notificationList} from "./noti.js";
+import { clearRegisteredStations } from "./maps.js";
 
 let isLoggedIn = false;
 
@@ -206,6 +207,9 @@ window.addEventListener('click', (e) => {
 // Hàm xử lý khi logout thành công
 function handleLogoutSuccess() {
     isLoggedIn = false;
+
+    // Gọi hàm clearRegisteredStations để reset danh sách trạm
+    clearRegisteredStations();
 
     // Show Sign In/Sign Up buttons
     authButtons.classList.remove('hidden');
