@@ -89,6 +89,7 @@ body {
 .station-info h4 {
   margin: 0;
   font-size: 18px;
+  align-self: flex-end;
 }
 
 .station-info p {
