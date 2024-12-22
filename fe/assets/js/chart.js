@@ -175,7 +175,7 @@ const options_CO2 = {
     scales: {
         y: {
             min: 300,
-            max: 500,
+            max: 800,
             ticks: {
                 stepSize: 20,
             }
@@ -240,7 +240,7 @@ const options_CO = {
     scales: {
         y: {
             min: 0,
-            max: 10,
+            max: 15,
             ticks: {
                 stepSize: 1,
             }
@@ -305,9 +305,9 @@ const options_NH4 = {
     scales: {
         y: {
             min: 0,
-            max: 5,
+            max: 0.5,
             ticks: {
-                stepSize: 1,
+                stepSize: 0.01,
             }
         },
         x: {
@@ -370,9 +370,9 @@ const options_PM25 = {
     scales: {
         y: {
             min: 0,
-            max: 50,
+            max: 150,
             ticks: {
-                stepSize: 5,
+                stepSize: 10,
             }
         },
         x: {

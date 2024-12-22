@@ -1,6 +1,7 @@
 # controller/log_controller.py
 from flask_pymongo import PyMongo
 from flask import jsonify
+from datetime import datetime
 
 class LogController:
     def __init__(self, app):
@@ -8,15 +9,14 @@ class LogController:
 
     def save_log(self, data):
         log = {
-            "device_id": data["device_id"],
-            "temperature": data["temperature"],
-            "humidity": data["humidity"],
-            "co": data["ppm"]["co"],
-            "co2": data["ppm"]["co2"],
-            "nh3": data["ppm"]["nh3"],
-            "pm25": data["ppm"]["pm25"],
-            "pm10": data["ppm"]["pm10"],
-            "senttime": data["senttime"]
+            "device_id": float(data["device_id"]),
+            "temperature": float(data["temperature"]),
+            "humidity": float(data["humidity"]),
+            "co": float(data["ppm"]["co"]),
+            "co2": float(data["ppm"]["co2"]),
+            "nh3": float(data["ppm"]["nh3"]),
+            "pm25": float(data["ppm"]["pm25"]),
+            "senttime": datetime.now().isoformat()
         }
         self.mongo.db.logs.insert_one(log)
         return jsonify({"message": "Log saved successfully"}), 201

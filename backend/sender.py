@@ -11,7 +11,7 @@ if client.connect("localhost", 1883, 60) != 0:
     print("Couldn't connect to the mqtt broker")
     sys.exit(1)
 
-device_ids = [21, 22, 23, 24, 25, 26, 27, 28]
+device_ids = [22, 23, 24, 25, 26, 27, 28]
 
 count = 0
 while count != 200:
@@ -23,9 +23,8 @@ while count != 200:
             "ppm": {
                 "co": round(random.uniform(0.0, 10.0), 2),
                 "co2": round(random.uniform(300.0, 500.0), 2),
-                "nh3": round(random.uniform(0.0, 5.0), 2),
+                "nh3": round(random.uniform(0.0, 0.05), 2),
                 "pm25": round(random.uniform(0.0, 50.0), 2),
-                "pm10": round(random.uniform(0.0, 100.0), 2)
             },
             "senttime": datetime.now().isoformat()
         }
