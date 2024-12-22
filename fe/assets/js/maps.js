@@ -47,8 +47,8 @@ locations.forEach(function(location) {
 // Hiển thị thông tin trạm
 function displayStationInfo(location) {
     document.getElementById('stationName').textContent = location.name;
-    document.getElementById('temperature').textContent = location.temperature;
-    document.getElementById('humidity').textContent = location.humidity;
+    // document.getElementById('temperature').textContent = location.temperature;
+    // document.getElementById('humidity').textContent = location.humidity;
 
     const registerButton = document.getElementById('registerStation');
     registerButton.textContent = location.registered ? "Hủy đăng ký" : "Đăng ký";
