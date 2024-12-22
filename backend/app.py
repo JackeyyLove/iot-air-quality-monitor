@@ -5,6 +5,11 @@ from flask_login import LoginManager, UserMixin
 import threading
 from services.mqtt_service import mqtt_client, message_handling
 from bson.objectid import ObjectId
+from flask_cors import CORS
+
+app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5500"}})
 
 mongo = PyMongo()
 bcrypt = Bcrypt()
@@ -26,13 +31,22 @@ def load_user(user_id):
 
 def create_app():
     app = Flask(__name__)
-    app.config["MONGO_URI"] = "mongodb+srv://chiennguyen35:12345@cluster0.jjlwlud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    app.config["MONGO_URI"] = "mongodb://admin:pass@localhost:27017/airDB?authSource=admin"
     app.config["SECRET_KEY"] = "secret"  # secret key for session management
 
     mongo.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'user_bp.signin'
+
+    # Thêm CORS vào đây
+    # CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5500"}})
+    CORS(app, 
+         resources={r"/*": {"origins": ["http://127.0.0.1:5500"]}}, 
+         supports_credentials=True,  # Để xử lý cookie/session
+         expose_headers=["Content-Type", "X-CSRFToken"], 
+         always_send=True  # Đảm bảo gửi CORS header mọi lúc
+    )
 
     # Custom handler for unauthorized access
     @login_manager.unauthorized_handler

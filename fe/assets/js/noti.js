@@ -1,11 +1,16 @@
 import { userDropdown } from "./auth.js";
-import { getNotifications } from "./data.js";
+// import { getNotifications } from "./data.js";
+import { getNotifications } from "./data_2.js";
 import { registeredStations } from "./maps.js";
 
 // Elements
 const notificationBtn = document.getElementById('notificationBtn');
 export const notificationList = document.getElementById('notificationList');
 const notificationItems = document.getElementById('notificationItems');
+const bellIcon = document.querySelector('.bell'); // Icon quả chuông
+const notiBell = document.querySelector('.noti_bell');
+
+let hasNewNotifications = false; // Trạng thái có thông báo mới
 
 // Example data for notifications
 const stationData = [
@@ -51,6 +56,12 @@ function renderNotifications() {
         `;
         notificationItems.appendChild(listItem);
     });
+
+    // Đặt trạng thái có thông báo mới nếu có thông báo chưa xem
+    if (alerts.length > 0) {
+        hasNewNotifications = true;
+        updateBellIcon();
+    }
 }
 
 // Toggle notification list visibility
@@ -59,6 +70,12 @@ notificationBtn.addEventListener('click', (e) => {
     renderNotifications();
     notificationList.classList.toggle('hidden');
     userDropdown.classList.add('hidden');
+
+    // Xóa chấm than đỏ khi thông báo đã được xem
+    if (!notificationList.classList.contains('hidden')) {
+        hasNewNotifications = false;
+        updateBellIcon();
+    }
 });
 
 // Hide notification list when clicking outside
@@ -68,7 +85,35 @@ window.addEventListener('click', (e) => {
     }
 });
 
+// Function to check for new notifications
+function checkNewNotifications() {
+    const alerts = getNotifications().filter(alert =>
+        registeredStations.includes(alert.station) &&
+        (alert.status === 'Warning' || alert.status === 'Danger')
+    );
+
+    // Nếu có thông báo mới so với lần trước
+    if (alerts.length > 0 && !notificationList.classList.contains('hidden')) {
+        hasNewNotifications = true;
+        updateBellIcon();
+    }
+}
+
+// Function to update bell icon
+function updateBellIcon() {
+    if (hasNewNotifications) {
+        bellIcon.classList.add('new-notification'); // Thêm class hiển thị chấm đỏ
+        notiBell.classList.remove('hidden');
+    } else {
+        bellIcon.classList.remove('new-notification'); // Xóa class chấm đỏ
+        notiBell.classList.add('hidden');
+    }
+}
+
 // Tự động cập nhật thông báo mỗi 30 giây
 setInterval(() => {
-    renderNotifications();
+    renderNotifications(),
+    checkNewNotifications();
 }, 30000);
+
+checkNewNotifications();

@@ -138,6 +138,48 @@ searchSelect.addEventListener('change', function() {
     }
 });
 
+export function clearRegisteredStations() {
+    // Reset danh sách các trạm đã đăng ký
+    registeredStations = [];
+
+    // Đặt trạng thái `registered` của tất cả các trạm về `false`
+    locations.forEach(location => {
+        location.registered = false;
+
+        // Cập nhật giao diện của marker
+        const marker = markers.find(marker =>
+            marker.getLatLng().lat === location.lat && marker.getLatLng().lng === location.lon
+        );
+        if (marker) {
+            marker.setIcon(L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+                shadowSize: [41, 41]
+            }));
+        }
+    });
+
+    // Cập nhật dropdown
+    const searchSelect = document.getElementById('maps-search');
+    Array.from(searchSelect.options).forEach(option => {
+        option.style.backgroundColor = "white";
+        option.style.color = "black";
+    });
+
+    // Cập nhật giao diện nút đăng ký
+    const registerButton = document.getElementById('registerStation');
+    if (registerButton) {
+        registerButton.textContent = "Đăng ký";
+        registerButton.classList.remove('registered');
+    }
+
+    console.log("All registered stations have been cleared.");
+}
+
+
 // Khi load giao diện, tự động chọn trạm Hà Nội
 window.onload = function() {
     // const defaultLocation = locations[0];

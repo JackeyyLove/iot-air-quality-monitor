@@ -2,8 +2,10 @@
 from flask import Blueprint, request, current_app
 from flask_login import login_required, current_user
 from controller.subscription_controller import SubscriptionController
+from flask_cors import CORS
 
 subscription_bp = Blueprint('subscription_bp', __name__)
+CORS(subscription_bp, resources={r"/*": {"origins": "http://127.0.0.1:5500"}})
 
 @subscription_bp.before_app_request
 def before_request():
