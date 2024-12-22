@@ -1,5 +1,6 @@
 import { userDropdown } from "./auth.js";
 import { getNotifications } from "./data.js";
+import { registeredStations } from "./maps.js";
 
 // Elements
 const notificationBtn = document.getElementById('notificationBtn');
@@ -25,15 +26,22 @@ function renderNotifications() {
 
     // Filter data: Only include 'Warning' or 'Danger' status
     // const alerts = stationData.filter(item => item.status === 'Warning' || item.status === 'Danger');
-    const alerts = getNotifications();
+    // const alerts = getNotifications();
+    const alerts = getNotifications().filter(alert => 
+        registeredStations.includes(alert.station) && 
+        (alert.status === 'Warning' || alert.status === 'Danger')
+    );
 
     if (alerts.length === 0) {
         notificationItems.innerHTML = '<li>No notifications</li>';
         return;
     }
 
+    // Đảo ngược danh sách để thông báo mới nhất xuất hiện trước
+    const reversedAlerts = alerts.slice().reverse();
+
     // Populate notification list
-    alerts.forEach(alert => {
+    reversedAlerts.forEach(alert => {
         const listItem = document.createElement('li');
         listItem.className = alert.status.toLowerCase();
         listItem.innerHTML = `
@@ -63,4 +71,4 @@ window.addEventListener('click', (e) => {
 // Tự động cập nhật thông báo mỗi 30 giây
 setInterval(() => {
     renderNotifications();
-}, 60000);
+}, 30000);

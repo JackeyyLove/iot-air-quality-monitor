@@ -1,5 +1,6 @@
 import updateConcentrations from './real_time.js';
 import { getStationData  } from './data.js';
+import { currentStation } from './maps.js';
 
 let dataCO2 = [];
 let dataCO = [];
@@ -187,11 +188,12 @@ export const chartAcetona = new Chart(ctxAcetona, {
 });
 
 // Cập nhật biểu đồ cho trạm mỗi 60s
-let currentStation = "Hà Nội";
+// let currentStation = "Hà Nội";
+// console.log(currentStation);
 
 updateChartsForStation(currentStation);
 
 setInterval(() => {
     updateChartsForStation(currentStation);
-}, 60000);
+}, 30000);
 export { updateChartsForStation };
