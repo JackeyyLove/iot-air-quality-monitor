@@ -31,7 +31,7 @@ def load_user(user_id):
 
 def create_app():
     app = Flask(__name__)
-    app.config["MONGO_URI"] = "mongodb+srv://chiennguyen35:12345@cluster0.jjlwlud.mongodb.net/airDB?retryWrites=true&w=majority&appName=Cluster0"
+    app.config["MONGO_URI"] = "mongodb://admin:pass@localhost:27017/airDB?authSource=admin"
     app.config["SECRET_KEY"] = "secret"  # secret key for session management
 
     mongo.init_app(app)
